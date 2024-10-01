@@ -32,16 +32,16 @@ class UserRepository {
   }
 
   async updateProducts(body) {
-    const { id, Name, description, price, image } = body;
+    const { Name, description, price, image, createdDate } = body;
 
     const [result] = await db.query(
-    'UPDATE `products` SET (`id`, `Name`, `description`, `price`, `image`) VALUES(?, ?, ?, ?, ?, ?)',
+    'UPDATE `products` SET `Name` = ?, `description` = ?, `price` = ?, `image` = ?, `createdDate` = ? WHERE `id` = ?',
     [
-      id,
       Name,
       description,
       price,
-      image
+      image,
+      createdDate,
     ]
     );
     return result;
